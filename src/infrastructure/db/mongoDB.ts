@@ -7,6 +7,15 @@ export class MongoDB implements ITodoRepository {
   constructor() {
     this.Todo = Todo;
   }
+  async toggleTodoComplete(id: string): Promise<ITodo | null> {
+    const updated = await Todo.findByIdAndUpdate(
+      id,
+      [{ $set: { completed: { $not: "$completed" } } }],
+      { returnDocument: "after" }
+    );
+    if (!updated) return null;
+    return { id: updated.id, task: updated.task, completed: updated.completed };
+  }
 
   async getTodos(): Promise<ITodo[]> {
     const todos = await Todo.find({}, { task: 1, _id: 1, completed: 1 });

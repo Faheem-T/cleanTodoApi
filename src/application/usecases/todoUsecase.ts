@@ -17,4 +17,8 @@ export class TodoUsecase {
   update(id: string, task: string) {
     return this.todoRepository.updateTodo(id, task);
   }
+
+  toggleComplete(id: string) {
+    return this.todoRepository.toggleTodoComplete(id);
+  }
 }

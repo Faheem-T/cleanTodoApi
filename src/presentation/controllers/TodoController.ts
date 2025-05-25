@@ -44,4 +44,17 @@ export class TodoController {
       res.status(200).json({ success: true, updated });
     }
   };
+
+  toggleComplete = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    if (!id) {
+      throw new Error("ID not  found!");
+    }
+    const toggled = await this.todoUsecase.toggleComplete(id);
+    if (!toggled) {
+      res.status(400).json({ message: "Todo not found!" });
+    } else {
+      res.status(200).json({ success: true, toggled });
+    }
+  };
 }

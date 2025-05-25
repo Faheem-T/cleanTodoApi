@@ -9,6 +9,14 @@ export class inMemoryDB implements ITodoRepository {
     this.todos = [];
     this.nextId = 1;
   }
+  async toggleTodoComplete(id: string): Promise<ITodo | null> {
+    return await new Promise<ITodo | null>((resolve, _reject) => {
+      const foundTodo = this.todos.find((todo) => todo.id === id);
+      if (!foundTodo) return resolve(null);
+      foundTodo.completed = !foundTodo.completed;
+      resolve(foundTodo);
+    });
+  }
 
   async getTodos(): Promise<ITodo[]> {
     return await new Promise<ITodo[]>((resolve, _reject) => {

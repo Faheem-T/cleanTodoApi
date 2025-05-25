@@ -18,4 +18,6 @@ router.delete("/:id", todoController.delete);
 
 router.patch("/:id", todoController.update);
 
+router.patch("/:id/complete", todoController.toggleComplete);
+
 export { router as todoRouter };

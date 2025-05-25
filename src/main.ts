@@ -3,8 +3,11 @@ import express, { NextFunction, Request, Response } from "express";
 import { todoRouter } from "./presentation/routes/todoRoutes.ts";
 import mongoose from "mongoose";
 import morgan from "morgan";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors({}));
 
 app.use(express.json());
 app.use(morgan("dev"));
